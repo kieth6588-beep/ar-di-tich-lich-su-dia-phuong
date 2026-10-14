@@ -87,10 +87,10 @@
       '[mindar-image-target="targetIndex: 0"]'
     );
     const thongbao = document.getElementById("thongbao");
-
-    mucTieu.addEventListener("targetFound", function () {
-      thongbao.textContent = "Da nhan dien hinh anh! Dang xem noi dung AR.";
-    });
+mucTieu.addEventListener("targetFound", function () {
+  thongbao.textContent = "Da nhan dien hinh anh! Dang xem noi dung AR.";
+  document.getElementById("khungVideo").style.display = "block";
+});
 
     mucTieu.addEventListener("targetLost", function () {
       thongbao.textContent = "Hay dua camera ve phia hinh anh muc tieu.";
