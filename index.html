@@ -1,74 +1,101 @@
+
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Ứng dụng công nghệ thực tế tăng cường (AR) trong giáo dục lịch sử địa phương</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Lịch sử địa phương</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: white;
-        }
+  <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-        h1 {
-            text-align: center;
-            color: #8B0000;
-        }
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
 
-        h2 {
-            color: #8B0000;
-        }
-
-        .box {
-            border: 2px solid red;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .title {
-            padding: 15px;
-            color: blue;
-            font-size: 20px;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .content {
-            display: none;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        button {
-            padding: 12px 20px;
-            background: #0066cc;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>AR Lịch sử địa phương</title>
+    #thongbao {
+      position: fixed;
+      z-index: 10;
+      top: 12px;
+      left: 10px;
+      right: 10px;
+      padding: 12px;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="thongbao">Đang khởi động AR... Hãy cho phép sử dụng camera.</div>
 
-    <h1>AR Lịch sử địa phương</h1>
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true;"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights: true"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
 
-    <p>Đây là trang WebAR của chúng tôi.</p>
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-plane
+        position="0 0.65 0"
+        width="1"
+        height="0.25"
+        color="#17365D"
+        material="shader: flat"
+        opacity="0.95">
+      </a-plane>
+
+      <a-text
+        value="DI TICH LICH SU"
+        position="0 0.65 0.01"
+        color="#FFFFFF"
+        align="center"
+        width="1.8">
+      </a-text>
+
+      <a-plane
+        position="0 0.25 0"
+        width="1.1"
+        height="0.3"
+        color="#FFFFFF"
+        material="shader: flat"
+        opacity="0.95">
+      </a-plane>
+
+      <a-text
+        value="Chao mung ban den voi di tich!"
+        position="0 0.25 0.01"
+        color="#111111"
+        align="center"
+        width="1.5">
+      </a-text>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    const mucTieu = document.querySelector(
+      '[mindar-image-target="targetIndex: 0"]'
+    );
+    const thongbao = document.getElementById("thongbao");
+
+    mucTieu.addEventListener("targetFound", function () {
+      thongbao.textContent = "Da nhan dien hinh anh! Dang xem noi dung AR.";
+    });
+
+    mucTieu.addEventListener("targetLost", function () {
+      thongbao.textContent = "Hay dua camera ve phia hinh anh muc tieu.";
+    });
+  </script>
 </body>
 </html>
-
-
-
 
