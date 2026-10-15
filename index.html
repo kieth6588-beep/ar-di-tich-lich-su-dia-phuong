@@ -81,7 +81,25 @@
       </a-text>
     </a-entity>
   </a-scene>
-
+<div id="khungVideo" style="
+  display:none;
+  position:fixed;
+  z-index:100;
+  left:5%;
+  bottom:20px;
+  width:90%;
+  padding:12px;
+  box-sizing:border-box;
+  background:white;
+  border-radius:12px;
+">
+  <h3 style="text-align:center;">Video giới thiệu di tích</h3>
+  <video controls playsinline preload="metadata"
+         style="width:100%; max-height:250px;">
+    <source src="./gioi-thieu.mp4" type="video/mp4">
+    Trình duyệt không hỗ trợ video.
+  </video>
+</div>
   <script>
     const mucTieu = document.querySelector(
       '[mindar-image-target="targetIndex: 0"]'
